@@ -16,7 +16,7 @@ module.exports = {
       directory: path.join(__dirname, 'dev'),
     },
     compress: true,
-    port: auto,
+    port: 9000,
   },
   module: {
     rules: [

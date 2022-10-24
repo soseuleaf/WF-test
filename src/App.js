@@ -4,12 +4,17 @@
  */
 
 // import data and module
+import React from 'react';
 import StarRating from "./components/StarRating";
+import DragBox from "./components/DragBox";
 
 function App() {
   return (
     // return StarRating component with totalStars property
-    <StarRating totalStars={99}/>
+    <React.Fragment>
+      <StarRating totalStars={99}/>
+      <DragBox/>
+    </React.Fragment>
   );
 }
 
