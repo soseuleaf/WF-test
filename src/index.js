@@ -1,13 +1,16 @@
 /**
- * ch05/recipes-app-01/src/index.js
+ * proj_path: ch06/ex/proj/sample-prj
+ * ./src/index.js
  */
 
-import React from "react";
-import {render} from "react-dom";
-import Menu from "./components/Menu";
-import data from "./data/recipes.json";
+// import react, react-dom/client, and module
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
 
-render(
-    <Menu recipes={data} />,
-    document.getElementById("root")
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );

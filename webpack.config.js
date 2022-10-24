@@ -1,6 +1,5 @@
 const path = require('path');
 
-
 module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -12,20 +11,24 @@ module.exports = {
     path: path.join(__dirname, "public", "assets"),
     filename: "bundle.js",
   },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'dev'),
+    },
+    compress: true,
+    port: auto,
+  },
   module: {
     rules: [
-      {
-        test: /\.(png|jpg|svg|gif)$/,
-        loader: 'url-loader',
-        options: {
-          name: '[name].[ext]?[hash]',
-          limit: 5000,
-        },
-      },
       {
         test: /\.(js|jsx)$/,
         exclude: '/node_modules/',
         loader: 'babel-loader',
+        options:{
+          presets: [
+            "@babel/preset-env", ["@babel/preset-react", {"runtime": "automatic"}]
+          ]
+        }
       },
     ],
   },
