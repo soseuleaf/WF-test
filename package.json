@@ -10,10 +10,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.11",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-draggable": "^4.4.5",
-    "serve": "^14.0.1"
+    "react-youtube": "^10.0.0",
+    "serve": "^14.0.1",
+    "style-loader": "^3.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.19.6",
