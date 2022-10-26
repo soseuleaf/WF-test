@@ -1,6 +1,6 @@
  ## Framer
  framer-motion를 통해 쉬운 컴포넌트에 고급스러운 애니메이션 추가.
- - figma 사용을 위한 플러그인 있긴한데 motion import 정도로만 사용하는게 좋을 듯?
+ - figma 플러그인 있긴한데 motion import 정도로만 사용하는게 좋을 듯?
  - 공식 문서
 	 - https://www.framer.com/docs/introduction/
  - 레이아웃 넘기기
@@ -34,3 +34,10 @@
 ## Youtube
 - 유튜브를 컴포넌트 형태로 제작
 	- https://velog.io/@soonmac/React-npm-react-youtube
+
+## 네온 사인
+-	css 로 네온 사인 구현
+	- https://css-tricks.com/how-to-create-neon-text-with-css/
+- react에서 css 구현
+	- https://velog.io/@sourmix/react-animation
+	- https://velog.io/@cinephile/%EB%A6%AC%EC%95%A1%ED%8A%B8-%EA%B8%B0%EC%B4%88%EB%B0%98-4-1-keyframes
