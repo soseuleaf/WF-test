@@ -1,11 +1,12 @@
 // import data and module
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { Fragment } from "react";
 import StarRating from "./components/StarRating";
 import DragBox from "./components/DragBox";
 import "./components/App.css";
 
-import { IconContext } from "react-icons";
+import { FaDoorOpen, FaDoorClosed } from "react-icons/fa";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import RecipeReviewCard from "./components/Card";
 import Slide from '@mui/material/Slide';
@@ -13,7 +14,7 @@ import { CARD_INFO } from './components/CardInfo';
 
 function Arrow(props) {
   const { direction, clickFunction } = props;
-  const icon = direction === 'left' ? <FaChevronLeft /> : <FaChevronRight />;
+  const icon = direction === 'left' ? <FaChevronLeft size={50}/> : <FaChevronRight size={50}/>;
 
   return <div onClick={clickFunction}>{icon}</div>;
 }
@@ -60,31 +61,23 @@ function App() {
 
   return (
     // return StarRating component with totalStars property
-    <React.Fragment>
+    <Fragment>
       <StarRating totalStars={99}/>
       <DragBox/>
+
+      <Arrow direction='left' size={500}/>
+      <FaDoorOpen color="grey" size={500} />
+
       <div className='SlideCard'>
-
-        <IconContext.Provider value={{ size: "5em" }}>
-          <div>
-            <Arrow direction='left' clickFunction={() => onArrowClick('left')}/>
-          </div>
-        </IconContext.Provider>
-
+        <Arrow direction='left' clickFunction={() => onArrowClick('left')}/>
         <Slide in={slideIn} direction={slideDirection}>
             <div>
               <RecipeReviewCard content={content}/>
             </div>
         </Slide>
-
-        <IconContext.Provider value={{ size: "5em" }}>
-          <div>
-            <Arrow direction='right' clickFunction={() => onArrowClick('left')}/>
-          </div>
-        </IconContext.Provider>
-
+        <Arrow direction='right' clickFunction={() => onArrowClick('left')}/>
       </div>
-    </React.Fragment>
+    </Fragment>
   );
 }
 
