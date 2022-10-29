@@ -12,6 +12,8 @@ import RecipeReviewCard from "./components/Card";
 import Slide from '@mui/material/Slide';
 import { CARD_INFO } from './components/CardInfo';
 
+import MediaPlayer from './components/MediaPlayer';
+
 function Arrow(props) {
   const { direction, clickFunction } = props;
   const icon = direction === 'left' ? <FaChevronLeft size={50}/> : <FaChevronRight size={50}/>;
@@ -60,6 +62,7 @@ function App() {
     });
 
   return (
+    /*
     // return StarRating component with totalStars property
     <Fragment>
       <StarRating totalStars={99}/>
@@ -79,6 +82,8 @@ function App() {
       </div>
     </Fragment>
   );
+  */
+  <MediaPlayer url='https://youtu.be/pyf8cbqyfPs'/>)
 }
 
 // export module

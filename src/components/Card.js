@@ -18,7 +18,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import PageviewIcon from '@mui/icons-material/Pageview';
-import AnimalCrossingIMG from '../resources/AnimalCrossing.jpg'
 
 // youtube
 import YouTube from 'react-youtube';
@@ -64,13 +63,11 @@ const RecipeReviewCard = (props) => {
                 weight: "auto",
                 height: "auto",
                 playerVars: {
-                autoplay: 1, //자동재생 O
-                rel: 0, //관련 동영상 표시하지 않음 (근데 별로 쓸모 없는듯..)
-                modestbranding: 1, // 컨트롤 바에 youtube 로고를 표시하지 않음
-                },
-            }}
-            //이벤트 리스너 
-            onEnd={(e)=>{e.target.stopVideo(0);}}
+                  autoplay: 1, //자동재생 O
+                  rel: 0, //관련 동영상 표시하지 않음
+                  modestbranding: 1, // 컨트롤 바에 youtube 로고를 표시하지 않음
+                }}}
+            onEnd={(e)=>{e.target.stopVideo(0);}} //이벤트 리스너 
         />
         <CardMedia
             component="img"
@@ -91,8 +88,7 @@ const RecipeReviewCard = (props) => {
             expand={expanded}
             onClick={handleExpandClick}
             aria-expanded={expanded}
-            aria-label="show more"
-          >
+            aria-label="show more">
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>
@@ -100,15 +96,6 @@ const RecipeReviewCard = (props) => {
           <CardContent>
             <Typography paragraph>
                 Test1
-            </Typography>
-            <Typography paragraph>
-                Test2
-            </Typography>
-            <Typography paragraph>
-                Test3
-            </Typography>
-            <Typography>
-                Test4
             </Typography>
           </CardContent>
         </Collapse>
