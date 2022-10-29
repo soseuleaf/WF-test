@@ -12,7 +12,6 @@ import RecipeReviewCard from "./components/Card";
 import Slide from '@mui/material/Slide';
 import { CARD_INFO } from './components/CardInfo';
 
-import MediaPlayer from './components/MediaPlayer';
 
 function Arrow(props) {
   const { direction, clickFunction } = props;
@@ -62,14 +61,10 @@ function App() {
     });
 
   return (
-    /*
     // return StarRating component with totalStars property
     <Fragment>
       <StarRating totalStars={99}/>
       <DragBox/>
-
-      <Arrow direction='left' size={500}/>
-      <FaDoorOpen color="grey" size={500} />
 
       <div className='SlideCard'>
         <Arrow direction='left' clickFunction={() => onArrowClick('left')}/>
@@ -82,8 +77,6 @@ function App() {
       </div>
     </Fragment>
   );
-  */
-  <MediaPlayer url='https://youtu.be/pyf8cbqyfPs'/>)
 }
 
 // export module

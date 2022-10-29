@@ -13,22 +13,9 @@ import VolumeDownRounded from '@mui/icons-material/VolumeDownRounded';
 
 import AnimalCrossingIMG from '/src/resources/animalcrossing.jpg'
 
-const WallPaper = styled('div')({
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    top: 0,
-    left: 0,
-    zIndex: -1,
-    overflow: 'hidden',
-    background: 'rgb(6, 6, 22)',
-  });
-
 const Widget = styled('div')(() => ({
     padding: 16,
     borderRadius: 16,
-    width: 343,
-    maxWidth: '100%',
     margin: 'auto',
     position: 'relative',
     zIndex: 1,
@@ -103,8 +90,8 @@ const MediaPlayer = (props) => {
         <>
             <ReactPlayer
                 className='react-player'
-                width='0%'
-                height='0%'
+                width='0'
+                height='0'
 
                 // url = parmeter, loop = fixed
                 url={url}
@@ -125,7 +112,6 @@ const MediaPlayer = (props) => {
                 onProgress={handleProgress}
             />
 
-            {/* 실제 플레이어 영역 */}
             <Widget>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                     <CoverImage>
@@ -140,7 +126,7 @@ const MediaPlayer = (props) => {
 
                 <Slider
                     aria-label="time-indicator" size="small"
-                    min={0} max={0.999999} step={0.01}
+                    min={0} max={0.999999} step={0.001}
                     value={played}
                     onChange={handleSeekChange}
                     onChangeCommitted={handleSeekMouseUp} 
@@ -204,8 +190,6 @@ const MediaPlayer = (props) => {
                     <VolumeUpRounded />
                 </Stack>
             </Widget>
-
-            <WallPaper />
         </>
     )
 }

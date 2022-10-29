@@ -18,9 +18,10 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import PageviewIcon from '@mui/icons-material/Pageview';
+import AnimalCrossingIMG from '/src/resources/animalcrossing.jpg'
 
-// youtube
-import YouTube from 'react-youtube';
+// media player
+import MediaPlayer from './MediaPlayer';
 
 const ExpandMore = styled((props) => {
   const { expand, ...more } = props;
@@ -35,7 +36,7 @@ const ExpandMore = styled((props) => {
 
 const RecipeReviewCard = (props) => {
     const [expanded, setExpanded] = React.useState(false);
-    const { backgroundColor, title, videoId } = props.content;
+    const { backgroundColor, title, url } = props.content;
   
     const handleExpandClick = () => {
       setExpanded(!expanded);
@@ -57,18 +58,8 @@ const RecipeReviewCard = (props) => {
           title={title}
           subheader="just test"
         />
-        <YouTube
-            videoId= {videoId}
-            opts={{
-                weight: "auto",
-                height: "auto",
-                playerVars: {
-                  autoplay: 1, //자동재생 O
-                  rel: 0, //관련 동영상 표시하지 않음
-                  modestbranding: 1, // 컨트롤 바에 youtube 로고를 표시하지 않음
-                }}}
-            onEnd={(e)=>{e.target.stopVideo(0);}} //이벤트 리스너 
-        />
+        <MediaPlayer url={url}/>
+        
         <CardMedia
             component="img"
             height="194"
