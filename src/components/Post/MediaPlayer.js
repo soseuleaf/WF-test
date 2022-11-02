@@ -1,19 +1,25 @@
+// React Base
 import React, {useState, useEffect} from "react";
-import ReactPlayer from 'react-player'
+
+// MUI material
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
+
+// MUI Icons
 import PauseRounded from '@mui/icons-material/PauseRounded';
 import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded';
 import VolumeUpRounded from '@mui/icons-material/VolumeUpRounded';
 import VolumeDownRounded from '@mui/icons-material/VolumeDownRounded';
 
-import AnimalCrossingIMG from '/src/resources/animalcrossing.jpg'
+// React Player
+import ReactPlayer from 'react-player'
 
 const Widget = styled('div')(() => ({
+    width: 300,
     padding: 16,
     borderRadius: 16,
     margin: 'auto',
@@ -37,53 +43,49 @@ const CoverImage = styled('div')({
 });
 
 const MediaPlayer = (props) => {
-    const [seeking, setSeeking] = useState(0);
-    const [playing, setPlaying] = useState(false);
-    const [volume, setVolume] = useState(0.1);
-    const [played, setPlayed] = useState(0);
-    const [mute, setMute] = useState(false);
-    const [timePlayed, setTimePlayed] = useState(0);
-    const url = props.url;
-
-    // ref 대체...
+    const [playTime, setPlayTime] = useState(0);
     const [instance, setInstance] = useState(null);
-    const handleStart = useEffect(() => {
+    const [volume, setVolume] = useState(0.1);
+    const [playing, setPlaying] = useState(false);
+    const [movedTime, setMovedTime] = useState(0);
+    const [seeking, setSeeking] = useState(0);
+
+    const music_img = props.img;
+    const music_title = props.title;
+    const music_url = props.url;
+
+    useEffect(() => {
         if (instance) {
-            instance.seekTo(timePlayed)
+            instance.seekTo(movedTime)
         }
-        
-    }, [instance, timePlayed])
+    }, [movedTime])
 
-    const handleSeekChange = e => {
-        setSeeking(true);
-        setPlayed(parseFloat(e.target.value));
-    }
-
-    const handleSeekMouseUp = (event, newValue) => {
-        setTimePlayed(newValue);
-        setSeeking(false);
-    }
-
-    const handlePlay = () => {
+    const autoPlay = () => {
         setPlaying(true);
     }
 
-    const handleVolumeChange = e => {
-        setVolume(parseFloat(e.target.value));
+    const handleSeekChange = e => {
+        setSeeking(true)
+        setPlayTime(parseFloat(e.target.value));
     }
 
-    const handlePlayPause = () => {
-        setPlaying(!playing);
-    }
-
-    const handleMuted = () => {
-        setMute(!mute);
+    const handleSeekMouseUp = (_, v) => {
+        setSeeking(false)
+        setMovedTime(v)
     }
 
     const handleProgress = state => {
         if (!seeking) {
-            setPlayed(state.played)
+            setPlayTime(state.played)
         }
+    }
+    
+    const handleVolumeChange = e => {
+        setVolume(parseFloat(e.target.value))
+    }
+
+    const handlePlayPause = () => {
+        setPlaying(!playing)
     }
 
     return (
@@ -91,62 +93,54 @@ const MediaPlayer = (props) => {
             <ReactPlayer
                 className='react-player'
                 width='0'
-                height='0'
+                height='0'  
 
-                // url = parmeter, loop = fixed
-                url={url}
+                url={music_url}
                 loop={true}
-
-                // with useState
                 playing={playing}
                 volume={volume}
-                muted={mute}
                 seeking={seeking}
 
-                // useRef
                 ref={setInstance}
-                
-                // 뭐임
-                onStart={handleStart}
-                onPlay={handlePlay}
+                onReady={autoPlay}
                 onProgress={handleProgress}
             />
 
             <Widget>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                     <CoverImage>
-                        <img src={AnimalCrossingIMG} />
+                        <img src={`/images/${music_img}`} />
                     </CoverImage>
                     <Box sx={{ ml: 1.5, minWidth: 0 }}>
-                        <Typography noWrap>
-                        <b>아 힘들다</b>
+                        <Typography noWrap variant="subtitle1">
+                            {music_title}
                         </Typography>
                     </Box>
                 </Box>
 
                 <Slider
                     aria-label="time-indicator" size="small"
-                    min={0} max={0.999999} step={0.001}
-                    value={played}
+                    min={0} max={0.999999} step={0.0001}
+                    value={playTime}
                     onChange={handleSeekChange}
                     onChangeCommitted={handleSeekMouseUp} 
                     sx={{
                         color: '#000',
                         height: 4,
                         '& .MuiSlider-thumb': {
-                        width: 8,
-                        height: 8,
-                        transition: '0.3s cubic-bezier(.47,1.64,.41,.8)',
-                        '&:before': {
-                            boxShadow: '0 2px 12px 0 rgba(0,0,0,0.4)',
-                        },
-                        '&:hover, &.Mui-focusVisible': {
-                            boxShadow: `0px 0px 0px 8px ${'rgb(255 255 255 / 16%)'}`,
-                        },
-                        '&.Mui-active': {
-                            width: 20,
-                            height: 20,
-                        },
+                            width: 8,
+                            height: 8,
+                            transition: '0.3s cubic-bezier(.47,1.64,.41,.8)',
+                            '&:before': {
+                                boxShadow: '0 2px 12px 0 rgba(0,0,0,0.4)',
+                            },
+                            '&:hover, &.Mui-focusVisible': {
+                                boxShadow: `0px 0px 0px 8px ${'rgb(255 255 255 / 16%)'}`,
+                            },
+                            '&.Mui-active': {
+                                width: 20,
+                                height: 20,
+                            },
                         },
                         '& .MuiSlider-rail': {
                         opacity: 0.28,
@@ -168,7 +162,7 @@ const MediaPlayer = (props) => {
                         value={volume} 
                         onChange={handleVolumeChange} 
                         aria-label="Volume"
-                        defaultValue={30}
+                        defaultValue={0.1}
                         sx={{
                         color: '#000',
                         '& .MuiSlider-track': {
@@ -191,6 +185,7 @@ const MediaPlayer = (props) => {
                 </Stack>
             </Widget>
         </>
+
     )
 }
 

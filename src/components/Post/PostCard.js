@@ -1,27 +1,27 @@
-import * as React from 'react';
+// React Base
+import React, { useState } from "react";
 
-// mui
+// MUI Material
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
 
-// icons & images
+// MUI Icons
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import PageviewIcon from '@mui/icons-material/Pageview';
-import AnimalCrossingIMG from '/src/resources/animalcrossing.jpg'
 
-// media player
+// Media Player
 import MediaPlayer from './MediaPlayer';
+
+// User Data
+import { UserDatas } from '/src/data/UserData';
 
 const ExpandMore = styled((props) => {
   const { expand, ...more } = props;
@@ -34,47 +34,48 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const RecipeReviewCard = (props) => {
-    const [expanded, setExpanded] = React.useState(false);
-    const { backgroundColor, title, url } = props.content;
+const PostCard = (props) => {
+    const [expanded, setExpanded] = useState(false);
+    const { user_id, post_title, post_content, music_img, music_title, music_url } = props.post;
+    const userData = UserDatas[user_id];
   
     const handleExpandClick = () => {
       setExpanded(!expanded);
     };
-  
+
     return (
-      <Card sx={{ maxWidth: 345 }}>
+      <Card>
         <CardHeader
-          avatar={
-            <Avatar sx={{ bgcolor: backgroundColor }} aria-label="recipe">
-              <PageviewIcon />
-            </Avatar>
-          }
+          avatar={ <Avatar alt="Avatar" src={`/images/${userData.user_profile}`}/> }
           action={
             <IconButton aria-label="settings">
               <MoreVertIcon />
             </IconButton>
           }
-          title={title}
-          subheader="just test"
+          title={ userData.user_name }
         />
-        <MediaPlayer url={url}/>
         
-        <CardMedia
-            component="img"
-            height="194"
-            image={AnimalCrossingIMG}
-            alt="pic"
+        <MediaPlayer 
+          img = {music_img} 
+          title = {music_title} 
+          url = {music_url}
         />
+
+        <IconButton aria-label="add to favorites">
+          <FavoriteIcon />
+        </IconButton>
+
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            어쩌구 저쩌구
+          <Typography gutterBottom variant="h5" component="div">
+            {post_title}
           </Typography>
+          <Typography variant="body2" color="text.secondary">
+                {post_content}
+            </Typography>
         </CardContent>
+
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
+
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
@@ -82,12 +83,12 @@ const RecipeReviewCard = (props) => {
             aria-label="show more">
             <ExpandMoreIcon />
           </ExpandMore>
+
         </CardActions>
+
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography paragraph>
-                Test1
-            </Typography>
+            
           </CardContent>
         </Collapse>
       </Card>
@@ -95,4 +96,4 @@ const RecipeReviewCard = (props) => {
   }
 
 
-export default RecipeReviewCard;
+export default PostCard;
