@@ -99,7 +99,6 @@ const MediaPlayer = (props) => {
                 loop={true}
                 playing={playing}
                 volume={volume}
-                seeking={seeking}
 
                 ref={setInstance}
                 onReady={autoPlay}
