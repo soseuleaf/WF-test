@@ -1,14 +1,14 @@
 // import data and module
 import React from 'react';
-import "./components/App.css";
-import SlidePost from './components/Post/SlidePost';
+import "./App.css";
+
+import SlidePost from './components/SlidePost';
+import GridTutorial from './components/Grid';
 
 function App() {
   return(
-    <div style={{backgroundColor: '#7070B7'}}>
-      <SlidePost />
-    </div>
-  )
+    <GridTutorial />
+  );
 }
 
 // export module

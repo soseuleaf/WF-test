@@ -35,16 +35,16 @@ const ExpandMore = styled((props) => {
 }));
 
 const PostCard = (props) => {
-    const [expanded, setExpanded] = useState(false);
+    const [checked, setChecked] = useState(false);
     const { user_id, post_title, post_content, music_img, music_title, music_url } = props.post;
     const userData = UserDatas[user_id];
   
     const handleExpandClick = () => {
-      setExpanded(!expanded);
+      setChecked(!checked);
     };
 
     return (
-      <Card>
+      <Card sx={{ width: '400px', alignItems: 'center' }}>
         <CardHeader
           avatar={ <Avatar alt="Avatar" src={`/images/${userData.user_profile}`}/> }
           action={
@@ -66,31 +66,27 @@ const PostCard = (props) => {
         </IconButton>
 
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {post_title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <div>
+            <Collapse in={checked} collapsedSize={60}>
+              <Typography gutterBottom variant="h5" component="div">
+                {post_title}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
                 {post_content}
-            </Typography>
+              </Typography>
+            </Collapse>
+          </div>
         </CardContent>
 
         <CardActions disableSpacing>
-
           <ExpandMore
-            expand={expanded}
+            expand={checked}
             onClick={handleExpandClick}
-            aria-expanded={expanded}
+            aria-expanded={checked}
             aria-label="show more">
             <ExpandMoreIcon />
           </ExpandMore>
-
         </CardActions>
-
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            
-          </CardContent>
-        </Collapse>
       </Card>
     );
   }

@@ -16,7 +16,6 @@ const Arrow = (props) =>{
     const icon = direction === 'left' ? 
         <FaChevronLeft size={50}/> : 
         <FaChevronRight size={50}/>;
-
     return (<div onClick={clickFunction}>{icon}</div>);
 }
 
@@ -59,26 +58,23 @@ const SlidePost = () => {
     };
 
     return (
-        <>
-            <div className='SlideCard'>
+        <div id='card'>
+            <Arrow 
+                direction='left' 
+                clickFunction={() => onArrowClick('left')}
+            />
 
-                <Arrow 
-                    direction='left' 
-                    clickFunction={() => onArrowClick('left')}
-                />
+            <Slide in={slideIn} direction={slideDirection}>
+                <div>
+                    <PostCard post={post}/>
+                </div>
+            </Slide>
 
-                <Slide in={slideIn} direction={slideDirection}>
-                    <div>
-                        <PostCard post={post}/>
-                    </div>
-                </Slide>
-
-                <Arrow 
-                    direction='right' 
-                    clickFunction={() => onArrowClick('right')}
-                />
-            </div>
-        </>
+            <Arrow 
+                direction='right' 
+                clickFunction={() => onArrowClick('right')}
+            />
+        </div>
     );
 }
 
